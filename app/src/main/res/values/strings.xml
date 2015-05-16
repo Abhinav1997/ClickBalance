@@ -1,0 +1,56 @@
+<resources>
+    <string name="app_name">Easy Balance</string>
+    <string name="hello_world">Easy Balance</string>
+    <string name="page1">Main page</string>
+
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
+    <string name="nav_item_general">Balance Enquiry</string>
+    <string name="network">Network</string>
+    <string name="pb">Phone Balance</string>
+    <string name="pbd">Get main balance</string>
+    <string name="db">2G Mobile Data</string>
+    <string name="dbd">Get information about 2G mobile data</string>
+    <string name="db3">3G Mobile Data</string>
+    <string name="dbd3">Get information about 3G mobile data</string>
+    <string name="db4">4G Mobile Data</string>
+    <string name="dbd4">Get information about 4G mobile data</string>
+    <string name="dnd">DND</string>
+    <string name="dndd">Activate/deactivate Do Not Disturb service</string>
+    <string name="action_settings">Settings</string>
+    <string name="help">Help and Feedback</string>
+    <string name="app_info">This app is meant to easily help people to know their main, data and SMS balance with just one click.</string>
+    <string name="support">Our aim is to support as many operators as possible from all around the world but in case your operator is not supported yet, you can let me know by email from Help and Feedback tab.</string>
+    <string name="select_option">Select an option from the drawer to begin</string>
+    <string name="rateus">Rate Us</string>
+    <string name="rategp">Please leave a rating on Google Play</string>
+    <string name="about">About</string>
+    <string name="version">Easy Balance v2.0.6</string>
+    <string name="dark">Dark Theme</string>
+    <string name="darkdesc">Enable/Disable dark theme</string>
+    <string name="credits">Credits</string>
+    <string name="gtk">Geetesh Kalakoti</string>
+    <string name="nosupport">Operator not supported ?</string>
+    <string name="mailme">Let me know via email</string>
+
+    <string-array name="spinner_items">
+        <item>@string/page1</item>
+        <item>@string/nav_item_general</item>
+        <item>@string/action_settings</item>
+        <item>@string/help</item>
+    </string-array>
+
+    <string-array name="nav_drawer_labels">
+        <item>@string/nav_item_general</item>
+        <item>@string/action_settings</item>
+        <item>@string/help</item>
+    </string-array>
+
+    <string-array name="nav_drawer_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+</resources>
