@@ -3,7 +3,9 @@ package com.aj.eb;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
@@ -28,10 +30,8 @@ public class BalanceFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_balance, container, false);
 
-        phn=g2=g3=g4=dnd=null;
-
-        final CardView card1 = (CardView) rootView.findViewById(R.id.c1);
         final CardView card2 = (CardView) rootView.findViewById(R.id.c2);
+        final CardView card1 = (CardView) rootView.findViewById(R.id.c1);
         final CardView card4 = (CardView) rootView.findViewById(R.id.c4);
         final CardView card5 = (CardView) rootView.findViewById(R.id.c5);
         final CardView card11 = (CardView) rootView.findViewById(R.id.c11);
@@ -174,7 +174,9 @@ public class BalanceFragment extends Fragment {
         phone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (phn == null) {
+                if (isAirplaneModeOn(getActivity().getApplicationContext())) {
+                    airplane();
+                } else if (phn == null) {
                     nosupport();
                 } else {
                     sphn(phn);
@@ -186,7 +188,9 @@ public class BalanceFragment extends Fragment {
         data2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (phn == null) {
+                if (isAirplaneModeOn(getActivity().getApplicationContext())) {
+                    airplane();
+                } else if (phn == null) {
                     nosupport();
                 } else if (g2 == null) {
                     opnosupport("2G data");
@@ -204,7 +208,9 @@ public class BalanceFragment extends Fragment {
         data3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (phn == null) {
+                if (isAirplaneModeOn(getActivity().getApplicationContext())) {
+                    airplane();
+                } else if (phn == null) {
                     nosupport();
                 } else if (shrt == "sprnt"|| shrt == "gff") {
                     smsg(g3);
@@ -220,7 +226,9 @@ public class BalanceFragment extends Fragment {
         data4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (phn == null) {
+                if (isAirplaneModeOn(getActivity().getApplicationContext())) {
+                    airplane();
+                } else if (phn == null) {
                     nosupport();
                 } else if (shrt == "artl" || shrt == "arcl") {
                     Toast.makeText(getActivity(), carrier + " 4G isn't properly supported", Toast.LENGTH_SHORT).show();
@@ -240,7 +248,9 @@ public class BalanceFragment extends Fragment {
         dnds.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (phn == null) {
+                if (isAirplaneModeOn(getActivity().getApplicationContext())) {
+                    airplane();
+                } else if (phn == null) {
                     nosupport();
                 } else if (dnd == null) {
                     opnosupport("DND");
@@ -257,6 +267,10 @@ public class BalanceFragment extends Fragment {
 
     private void opnosupport(String s) {
         Toast.makeText(getActivity(), "This operator does not support "+s, Toast.LENGTH_SHORT).show();
+    }
+
+    private void airplane() {
+        Toast.makeText(getActivity(), "Kindly turn off airplane mode", Toast.LENGTH_SHORT).show();
     }
 
     private void smsg(String num) {
@@ -284,10 +298,21 @@ public class BalanceFragment extends Fragment {
     }
 
     private void getnetwork() {
+        phn=g2=g3=g4=dnd=null;
         TelephonyManager manager = (TelephonyManager)getActivity().getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
         carrier = manager.getNetworkOperatorName();
         country = manager.getNetworkCountryIso();
         carrier1 = carrier.toUpperCase();
         country = country.toUpperCase();
+    }
+
+    private static boolean isAirplaneModeOn(Context context) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            return Settings.System.getInt(context.getContentResolver(),
+                    Settings.System.AIRPLANE_MODE_ON, 0) != 0;
+        } else {
+            return Settings.Global.getInt(context.getContentResolver(),
+                    Settings.Global.AIRPLANE_MODE_ON, 0) != 0;
+        }
     }
 };
