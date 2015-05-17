@@ -36,6 +36,7 @@ public class BalanceFragment extends Fragment {
         final CardView card5 = (CardView) rootView.findViewById(R.id.c5);
         final CardView card11 = (CardView) rootView.findViewById(R.id.c11);
         final CardView card12 = (CardView) rootView.findViewById(R.id.c12);
+        final TextView net = (TextView) rootView.findViewById(R.id.nname);
 
         if(SettingsFragment.theme==1) {
             card1.setCardBackgroundColor(0xff424242);
@@ -46,14 +47,9 @@ public class BalanceFragment extends Fragment {
             card12.setCardBackgroundColor(0xff424242);
         }
 
-        TelephonyManager manager = (TelephonyManager)getActivity().getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
-        carrier = manager.getNetworkOperatorName();
-        country = manager.getNetworkCountryIso();
+        getnetwork();
 
-        TextView net = (TextView) rootView.findViewById(R.id.nname);
         net.setText(carrier);
-        carrier1 = carrier.toUpperCase();
-        country = country.toUpperCase();
         getcodes();
         showdetails();
         return rootView;
@@ -285,5 +281,13 @@ public class BalanceFragment extends Fragment {
         Uri uri = Uri.parse(gx);
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         startActivity(intent);
+    }
+
+    private void getnetwork() {
+        TelephonyManager manager = (TelephonyManager)getActivity().getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
+        carrier = manager.getNetworkOperatorName();
+        country = manager.getNetworkCountryIso();
+        carrier1 = carrier.toUpperCase();
+        country = country.toUpperCase();
     }
 };
