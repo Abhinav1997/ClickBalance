@@ -85,7 +85,7 @@
         android:layout_margin="8dp"
         android:foreground="?android:attr/selectableItemBackground"
         android:clickable="true"
-        android:id="@+id/c4">
+        android:id="@+id/c3">
 
         <RelativeLayout
             android:id="@+id/dba"
@@ -120,7 +120,7 @@
         android:layout_margin="8dp"
         android:foreground="?android:attr/selectableItemBackground"
         android:clickable="true"
-        android:id="@+id/c11">
+        android:id="@+id/c4">
 
         <RelativeLayout
             android:id="@+id/dba3"
@@ -155,7 +155,7 @@
         android:layout_margin="8dp"
         android:foreground="?android:attr/selectableItemBackground"
         android:clickable="true"
-        android:id="@+id/c12">
+        android:id="@+id/c5">
 
     <RelativeLayout
         android:id="@+id/dba4"
@@ -190,7 +190,7 @@
         android:layout_margin="8dp"
         android:foreground="?android:attr/selectableItemBackground"
         android:clickable="true"
-        android:id="@+id/c5">
+        android:id="@+id/c6">
 
         <RelativeLayout
             android:id="@+id/dndl"

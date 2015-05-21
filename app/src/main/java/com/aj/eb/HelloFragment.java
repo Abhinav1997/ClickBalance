@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 public class HelloFragment extends Fragment {
 
@@ -15,6 +16,13 @@ public class HelloFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_hello, container, false);
+
+        final RelativeLayout lay = (RelativeLayout) rootView.findViewById(R.id.lay);
+
+        if(SettingsFragment.theme==1) {
+            lay.setBackgroundColor(0xff424242);
+        }
+
 
         return rootView;
     }

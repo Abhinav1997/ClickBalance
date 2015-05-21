@@ -30,21 +30,21 @@ public class BalanceFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_balance, container, false);
 
-        final CardView card2 = (CardView) rootView.findViewById(R.id.c2);
         final CardView card1 = (CardView) rootView.findViewById(R.id.c1);
+        final CardView card2 = (CardView) rootView.findViewById(R.id.c2);
+        final CardView card3 = (CardView) rootView.findViewById(R.id.c3);
         final CardView card4 = (CardView) rootView.findViewById(R.id.c4);
         final CardView card5 = (CardView) rootView.findViewById(R.id.c5);
-        final CardView card11 = (CardView) rootView.findViewById(R.id.c11);
-        final CardView card12 = (CardView) rootView.findViewById(R.id.c12);
+        final CardView card6 = (CardView) rootView.findViewById(R.id.c6);
         final TextView net = (TextView) rootView.findViewById(R.id.nname);
 
         if(SettingsFragment.theme==1) {
             card1.setCardBackgroundColor(0xff424242);
             card2.setCardBackgroundColor(0xff424242);
+            card3.setCardBackgroundColor(0xff424242);
             card4.setCardBackgroundColor(0xff424242);
             card5.setCardBackgroundColor(0xff424242);
-            card11.setCardBackgroundColor(0xff424242);
-            card12.setCardBackgroundColor(0xff424242);
+            card6.setCardBackgroundColor(0xff424242);
         }
 
         getnetwork();

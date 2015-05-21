@@ -1,6 +1,7 @@
 package com.aj.eb;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.os.Bundle;
@@ -70,11 +71,16 @@ public class DrawerFragment extends Fragment {
         ImageView img = (ImageView) rootView.findViewById(R.id.img_nav);
 
         if (SettingsFragment.theme==1) {
-            img.setImageResource(R.drawable.ic_nav);
             rootView.setBackgroundColor(0xff303030);
-        } else {
-            img.setImageResource(R.drawable.ic_nav);
         }
+
+        img.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                Intent intent = new Intent(DrawerFragment.this.getActivity(), MainActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
 
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.drawer_list);
         mAdapter = new DrawerAdapter(getActivity(), getItems());

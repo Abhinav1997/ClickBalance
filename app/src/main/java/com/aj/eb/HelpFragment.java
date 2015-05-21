@@ -27,7 +27,8 @@ public class HelpFragment extends Fragment {
         final CardView card8 = (CardView) rootView.findViewById(R.id.c8);
         final CardView card9 = (CardView) rootView.findViewById(R.id.c9);
         final CardView card10 = (CardView) rootView.findViewById(R.id.c10);
-        final CardView card6 = (CardView) rootView.findViewById(R.id.c6);
+        final CardView card11 = (CardView) rootView.findViewById(R.id.c11);
+        final CardView card12 = (CardView) rootView.findViewById(R.id.c12);
 
         TelephonyManager manager = (TelephonyManager)getActivity().getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
         carrier = manager.getNetworkOperatorName();
@@ -38,18 +39,9 @@ public class HelpFragment extends Fragment {
             card8.setCardBackgroundColor(0xff424242);
             card9.setCardBackgroundColor(0xff424242);
             card10.setCardBackgroundColor(0xff424242);
-            card6.setCardBackgroundColor(0xff424242);
+            card11.setCardBackgroundColor(0xff424242);
+            card12.setCardBackgroundColor(0xff424242);
         }
-
-        RelativeLayout rating =(RelativeLayout) rootView.findViewById(R.id.rate);
-        rating.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Uri uri = Uri.parse("https://play.google.com/store/apps/details?id=com.aj.eb");
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(intent);
-            }
-        });
 
         RelativeLayout support =(RelativeLayout) rootView.findViewById(R.id.mail);
         support.setOnClickListener(new View.OnClickListener(){
@@ -61,6 +53,26 @@ public class HelpFragment extends Fragment {
                 intent.putExtra(Intent.EXTRA_SUBJECT, "Operator Support Request");
                 intent.putExtra(Intent.EXTRA_TEXT, "Operator: " + carrier + " , Country Code: " + country);
                 startActivity(Intent.createChooser(intent, "Send Email"));
+            }
+        });
+
+        RelativeLayout rating =(RelativeLayout) rootView.findViewById(R.id.rate);
+        rating.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Uri uri = Uri.parse("https://play.google.com/store/apps/details?id=com.aj.eb");
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+            }
+        });
+
+        RelativeLayout source =(RelativeLayout) rootView.findViewById(R.id.source);
+        source.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Uri uri = Uri.parse("https://github.com/OpenMatter/EasyBalance");
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
             }
         });
 
