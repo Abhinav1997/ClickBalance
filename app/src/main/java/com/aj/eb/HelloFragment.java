@@ -17,13 +17,6 @@ public class HelloFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_hello, container, false);
 
-        final RelativeLayout lay = (RelativeLayout) rootView.findViewById(R.id.lay);
-
-        if(SettingsFragment.theme==1) {
-            lay.setBackgroundColor(0xff424242);
-        }
-
-
         return rootView;
     }
 }

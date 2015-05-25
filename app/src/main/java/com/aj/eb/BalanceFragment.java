@@ -166,6 +166,10 @@ public class BalanceFragment extends Fragment {
             } else if (carrier1.contains("MEDION")) {
                 phn = g2 = g3 = g4 = "*100#";
             }
+        } else if (country.contains("BE")) {
+            if (carrier1.contains("MOBISTAR")) {
+                phn = g2 = g3 = g4 = "#123#";
+            }
         }
     }
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Easy Balance</string>
+    <string name="app_name">Click Balance</string>
     <string name="app_info">This app is meant to easily help people to know their main, data and SMS balance with just one click.</string>
     <string name="support">Our aim is to support as many operators as possible from all around the world but in case your operator is not supported yet, you can let me know by email from Help and Feedback tab.</string>
 
@@ -36,11 +36,11 @@
     <string name="rateus">Rate Us</string>
     <string name="rategp">Please leave a rating on Google Play</string>
     <string name="source">Source Code</string>
-    <string name="subsource">Easy Balance is open source</string>
+    <string name="subsource">Click Balance is open source</string>
     <string name="credits">Credits</string>
     <string name="gtk">Geetesh Kalakoti</string>
     <string name="about">About</string>
-    <string name="version">Easy Balance v2.1</string>
+    <string name="version">Click Balance v2.1.1</string>
 
     <string-array name="spinner_items">
         <item>@string/page1</item>
