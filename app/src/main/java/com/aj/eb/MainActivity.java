@@ -2,21 +2,20 @@ package com.aj.eb;
 
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
-import android.media.audiofx.BassBoost;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 
-public class MainActivity extends ActionBarActivity implements DrawerFragment.DrawerListener {
+public class MainActivity extends AppCompatActivity implements DrawerFragment.DrawerListener {
 
     Drawable oldDrawable;
     DrawerFragment mFragment;
@@ -44,7 +43,6 @@ public class MainActivity extends ActionBarActivity implements DrawerFragment.Dr
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         mFragment = (DrawerFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
         mFragment.init(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
@@ -53,7 +51,7 @@ public class MainActivity extends ActionBarActivity implements DrawerFragment.Dr
             displayView(1);
             SettingsFragment.tom = 0;
         } else {
-            displayView(-1);
+            displayView(0);
         }
     }
 
@@ -84,9 +82,6 @@ public class MainActivity extends ActionBarActivity implements DrawerFragment.Dr
     private void displayView(int position) {
         Fragment fragment = null;
         switch (position) {
-            case -1:
-                fragment = new HelloFragment();
-                break;
             case 0:
                 fragment = new BalanceFragment();
                 break;

@@ -70,7 +70,7 @@ public class HelpFragment extends Fragment {
         source.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Uri uri = Uri.parse("https://github.com/OpenMatter/ClickBalance");
+                Uri uri = Uri.parse("https://github.com/Abhinav1997/ClickBalance");
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
             }

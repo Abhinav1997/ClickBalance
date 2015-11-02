@@ -117,13 +117,13 @@ public class DrawerFragment extends Fragment {
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-                ((ActionBarActivity) getActivity()).invalidateOptionsMenu();
+                getActivity().invalidateOptionsMenu();
             }
 
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
-                ((ActionBarActivity) getActivity()).invalidateOptionsMenu();
+                getActivity().invalidateOptionsMenu();
             }
 
             @Override
@@ -187,6 +187,11 @@ public class DrawerFragment extends Fragment {
 
         @Override
         public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+        }
+
+        @Override
+        public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
         }
     }
 }
