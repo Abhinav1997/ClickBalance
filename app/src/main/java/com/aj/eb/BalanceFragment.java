@@ -1,13 +1,17 @@
 package com.aj.eb;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
@@ -20,8 +24,10 @@ import android.widget.Toast;
 
 public class BalanceFragment extends Fragment {
 
-    private String phn,g2,g3,g4,dnd,carrier1,shrt,txt,carrier,country;
+    private String phn, g2, g3, g4, dnd, carrier1, shrt, txt, carrier, country;
     View rootView;
+    int phoneCheck, smsCheck;
+    private static final int PERMISSIONS_REQUEST_CALL_PHONE = 0, PERMISSIONS_REQUEST_SEND_SMS = 1;
 
     public BalanceFragment() {
     }
@@ -29,6 +35,9 @@ public class BalanceFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_balance, container, false);
+
+        phoneCheck = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CALL_PHONE);
+        smsCheck = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.SEND_SMS);
 
         final CardView card1 = (CardView) rootView.findViewById(R.id.c1);
         final CardView card2 = (CardView) rootView.findViewById(R.id.c2);
@@ -38,7 +47,8 @@ public class BalanceFragment extends Fragment {
         final CardView card6 = (CardView) rootView.findViewById(R.id.c6);
         final TextView net = (TextView) rootView.findViewById(R.id.nname);
 
-        if(SettingsFragment.theme==1) {
+
+        if (SettingsFragment.theme == 1) {
             card1.setCardBackgroundColor(0xff424242);
             card2.setCardBackgroundColor(0xff424242);
             card3.setCardBackgroundColor(0xff424242);
@@ -53,6 +63,13 @@ public class BalanceFragment extends Fragment {
         getcodes();
         showdetails();
         return rootView;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        startActivity(intent);
+        getActivity().finish();
     }
 
     private void getcodes() {
@@ -223,7 +240,7 @@ public class BalanceFragment extends Fragment {
                     airplane();
                 } else if (phn == null) {
                     nosupport();
-                } else if (shrt == "sprnt"|| shrt == "gff") {
+                } else if (shrt == "sprnt" || shrt == "gff") {
                     smsg(g3);
                 } else if (shrt == "vodait") {
                     net(g3);
@@ -277,7 +294,7 @@ public class BalanceFragment extends Fragment {
     }
 
     private void opnosupport(String s) {
-        Toast.makeText(getActivity(), "This operator does not support "+s, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "This operator does not support " + s, Toast.LENGTH_SHORT).show();
     }
 
     private void airplane() {
@@ -285,21 +302,30 @@ public class BalanceFragment extends Fragment {
     }
 
     private void smsg(String num) {
-        try {
-            SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage(num, null, txt, null, null);
-            Toast.makeText(getActivity(), "SMS for data usage sent", Toast.LENGTH_SHORT).show();
-        } catch (Exception e) {
-            Toast.makeText(getActivity(), "SMS sending failed", Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
+        if (smsCheck != PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(getActivity().getApplicationContext(), "SMS permissions not provided.", Toast.LENGTH_LONG).show();
+            permissionCheck(1);
+        } else {
+            try {
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(num, null, txt, null, null);
+                Toast.makeText(getActivity(), "SMS for data usage sent", Toast.LENGTH_SHORT).show();
+            } catch (Exception e) {
+                Toast.makeText(getActivity(), "SMS sending failed", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
+            }
         }
-
     }
 
     private void sphn(String phne) {
-        Uri uri = Uri.parse("tel:" + Uri.encode(phne));
-        Intent intent = new Intent(Intent.ACTION_CALL, uri);
-        startActivity(intent);
+        if (phoneCheck != PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(getActivity().getApplicationContext(), "Telephone permissions not provided.", Toast.LENGTH_LONG).show();
+            permissionCheck(0);
+        } else {
+            Uri uri = Uri.parse("tel:" + Uri.encode(phne));
+            Intent intent = new Intent(Intent.ACTION_CALL, uri);
+            startActivity(intent);
+        }
     }
 
     private void net(String gx) {
@@ -309,8 +335,8 @@ public class BalanceFragment extends Fragment {
     }
 
     private void getnetwork() {
-        phn=g2=g3=g4=dnd=null;
-        TelephonyManager manager = (TelephonyManager)getActivity().getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
+        phn = g2 = g3 = g4 = dnd = null;
+        TelephonyManager manager = (TelephonyManager) getActivity().getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
         carrier = manager.getNetworkOperatorName();
         country = manager.getNetworkCountryIso();
         carrier1 = carrier.toUpperCase();
@@ -326,4 +352,17 @@ public class BalanceFragment extends Fragment {
                     Settings.Global.AIRPLANE_MODE_ON, 0) != 0;
         }
     }
-};
+
+    private void permissionCheck(int check) {
+        switch (check) {
+            case 0: {
+                requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, PERMISSIONS_REQUEST_CALL_PHONE);
+                break;
+            }
+            case 1: {
+                requestPermissions(new String[]{Manifest.permission.SEND_SMS}, PERMISSIONS_REQUEST_SEND_SMS);
+                break;
+            }
+        }
+    }
+}
