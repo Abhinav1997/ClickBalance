@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements DrawerFragment.Dr
         TextView textView = (TextView) view.findViewById(R.id.title);
         oldDrawable = imageView.getDrawable();
         imageView.setImageResource(resources[position]);
-        textView.setTextColor(0xff2196f3);
+        textView.setTextColor(0xff009688);
         mToolbar.setTitle(textView.getText());
         displayView(position);
     }

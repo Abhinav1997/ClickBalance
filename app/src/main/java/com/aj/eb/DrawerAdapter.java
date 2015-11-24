@@ -27,8 +27,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.CustomHold
     @Override
     public DrawerAdapter.CustomHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View view = mInflater.inflate(R.layout.drawer_row, viewGroup, false);
-        CustomHolder holder = new CustomHolder(view);
-        return holder;
+        return new CustomHolder(view);
     }
 
     @Override

@@ -68,19 +68,10 @@ public class DrawerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_drawer, container, false);
-        ImageView img = (ImageView) rootView.findViewById(R.id.img_nav);
 
         if (SettingsFragment.theme==1) {
             rootView.setBackgroundColor(0xff303030);
         }
-
-        img.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v) {
-                Intent intent = new Intent(DrawerFragment.this.getActivity(), MainActivity.class);
-                startActivity(intent);
-                getActivity().finish();
-            }
-        });
 
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.drawer_list);
         mAdapter = new DrawerAdapter(getActivity(), getItems());
@@ -141,15 +132,15 @@ public class DrawerFragment extends Fragment {
         });
     }
 
-    public static interface ClickListener {
+    public interface ClickListener {
 
-        public void onClick(View view, int position);
-        public void onLongClick(View view, int position);
+        void onClick(View view, int position);
+        void onLongClick(View view, int position);
     }
 
     public interface DrawerListener {
 
-        public void onDrawerItemSelected(View view, int position);
+        void onDrawerItemSelected(View view, int position);
     }
 
     static class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
