@@ -176,6 +176,9 @@ public class BalanceFragment extends Fragment {
             if (carrier1.contains("MEGA")) {
                 phn = "*100#";
                 g2 = g3 = g4 = "*217#";
+            } else if (carrier1.contains("MTS")) {
+                phn = "*100#";
+                g2 = g3 = g4 = "*111*217#";
             }
         } else if (country.contains("DE")) {
             if (carrier1.contains("NETZCLUB")) {
